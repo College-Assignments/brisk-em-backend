@@ -4,5 +4,5 @@ app = FastAPI()
 
 
 @app.get("/")
-def read_root():
+def root():
     return {"200": "Welcome to BriskES"}
