@@ -1,1 +1,0 @@
-source briskenv/bin/activate envname
