@@ -1,16 +1,23 @@
 import uvicorn
 from fastapi import FastAPI
 from routes.ai import router as ai_router
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def run_app() -> FastAPI:
-    application = FastAPI()
-    print("Starting application...")
+    app = FastAPI()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     # Routes
-    application.include_router(ai_router, prefix="/api/ai")
+    app.include_router(ai_router, prefix="/api/ai")
 
-    return application
+    return app
 
 
 if __name__ == "__main__":
