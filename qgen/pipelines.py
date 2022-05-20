@@ -5,7 +5,7 @@ from typing import Optional, Dict, Union
 from nltk import sent_tokenize
 
 import torch
-from transformers import(
+from transformers import (
     AutoModelForSeq2SeqLM, 
     AutoTokenizer,
     PreTrainedModel,
@@ -52,7 +52,7 @@ class QGPipeline:
         flat_answers = list(itertools.chain(*answers))
         
         if len(flat_answers) == 0:
-          return []
+            return []
 
         if self.qg_format == "prepend":
             qg_examples = self._prepare_inputs_for_qg_from_answers_prepend(inputs, answers)
@@ -93,13 +93,7 @@ class QGPipeline:
         
         return sents, answers
     
-    def _tokenize(self,
-        inputs,
-        padding=True,
-        truncation=True,
-        add_special_tokens=True,
-        max_length=512
-    ):
+    def _tokenize(self, inputs, padding=True, truncation=True, add_special_tokens=True, max_length=512):
         inputs = self.tokenizer.batch_encode_plus(
             inputs, 
             max_length=max_length,
