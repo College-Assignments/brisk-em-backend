@@ -2,20 +2,21 @@
 
 # Basic Usage
 
+### Setup Environment
+
+```bash
+virtualenv -p /usr/bin/python3 briskenv
+source briskenv/bin/activate envname
+pip install -r requirements.txt
+```
+
 ### Run Locally
 
 ```
-heroku local
+python main.py
 ```
 
-### Deploy to heroku
-
-```
-heroku create
-git push heroku master
-```
-
-### Test
+### Run Test
 
 ```
 pytest
