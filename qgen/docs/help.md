@@ -1,17 +1,17 @@
-```
+```shell
 virtualenv -p /usr/bin/python3 quizgen
 ```
 
-```
+```shell
 cd quizgen/bin
 source activate envname
 
-or
+# or
 
 source briskenv/bin/activate envname
 ```
 
-```
+```python
 cd question_generation
 pip install wikipedia --quiet
 # pip install -U transformers==3.0.0 --quiet

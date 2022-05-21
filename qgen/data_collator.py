@@ -34,14 +34,15 @@ class T2TDataCollator:
         """
         input_ids = torch.stack([example["source_ids"] for example in batch])
         target_ids = torch.stack([example["target_ids"] for example in batch])
-        attention_mask = torch.stack(
-            [example["attention_mask"] for example in batch])
+        attention_mask = torch.stack([example["attention_mask"] for example in batch])
 
         pad_token_id = self.tokenizer.pad_token_id
 
         # don't trim on tpu, for some reason trimming leads to slower training on TPU
         if not self.using_tpu:
-            input_ids, attention_mask = trim_batch(input_ids, pad_token_id, attention_mask=attention_mask)
+            input_ids, attention_mask = trim_batch(
+                input_ids, pad_token_id, attention_mask=attention_mask
+            )
             target_ids = trim_batch(target_ids, pad_token_id)
 
         if self.model_type == "t5":
@@ -78,11 +79,14 @@ class T2TDataCollator:
         shifted_input_ids[..., 1:] = input_ids[..., :-1].clone()
         shifted_input_ids[..., 0] = decoder_start_token_id
 
-        assert pad_token_id is not None, "self.model.config.pad_token_id has to be defined."
+        assert (
+            pad_token_id is not None
+        ), "self.model.config.pad_token_id has to be defined."
         # replace possible -100 values in labels by `pad_token_id`
         shifted_input_ids.masked_fill_(shifted_input_ids == -100, pad_token_id)
 
-        assert torch.all(shifted_input_ids >= 0).item(
-        ), "Verify that `labels` has only positive values and -100"
+        assert torch.all(
+            shifted_input_ids >= 0
+        ).item(), "Verify that `labels` has only positive values and -100"
 
         return shifted_input_ids

@@ -11,11 +11,12 @@ if is_apex_available():
 
 from utils import label_smoothed_nll_loss
 
+
 class Trainer(HFTrainer):
     def __init__(self, label_smoothing: float = 0, **kwargs):
         super().__init__(**kwargs)
         self.label_smoothing = label_smoothing
-    
+
     # override to support label smoothing
     def _training_step(
         self, model: nn.Module, inputs: Dict[str, Union[torch.Tensor, Any]], optimizer: torch.optim.Optimizer
@@ -25,14 +26,14 @@ class Trainer(HFTrainer):
             if isinstance(v, torch.Tensor):
                 inputs[k] = v.to(self.args.device)
 
-
         # Our model outputs do not work with DataParallel, so forcing return tuple.
         if isinstance(model, nn.DataParallel):
             inputs["return_tuple"] = True
 
         if self.label_smoothing == 0:
             outputs = model(**inputs)
-            loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
+            # model outputs are always tuple in transformers (see doc)
+            loss = outputs[0]
         else:
             labels = inputs.pop("labels")
             labels[labels == -100] = model.config.pad_token_id

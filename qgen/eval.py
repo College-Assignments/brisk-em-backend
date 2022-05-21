@@ -20,9 +20,7 @@ class EvalArguments:
             "help": "Path to pretrained model or model identifier from huggingface.co/models"
         }
     )
-    valid_file_path: str = field(
-        metadata={"help": "Path for cached valid dataset"}
-    )
+    valid_file_path: str = field(metadata={"help": "Path for cached valid dataset"})
     model_type: str = field(metadata={"help": "One of 't5', 'bart'"})
     tokenizer_name_or_path: Optional[str] = field(
         default=None,
