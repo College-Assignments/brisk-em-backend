@@ -2,15 +2,21 @@
 
 # Basic Usage
 
-Run Locally
+### Run Locally
 
 ```
 heroku local
 ```
 
-Deploy to heroku
+### Deploy to heroku
 
 ```
 heroku create
 git push heroku master
+```
+
+### Test
+
+```
+pytest
 ```
