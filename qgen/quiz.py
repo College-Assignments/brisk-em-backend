@@ -26,7 +26,7 @@ def generate_qa(wiki_title: str = "Depp v. Heard"):
 
 def generate_custom_qa(input: str = ""):
     if input == "":
-        return
+        return ValueError("Empty not allowed")
 
     json_result = nlp(input)
     json_result = filter_length_answers(json_result)
