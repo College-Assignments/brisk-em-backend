@@ -41,5 +41,6 @@ def filter_length_answers(json_result):
         lenght_of_answer = len(qa_pair["answer"])
         if lenght_of_answer > 30:
             continue
+        qa_pair["answer"] = qa_pair["answer"].capitalize()
         result.append(qa_pair)
     return result
