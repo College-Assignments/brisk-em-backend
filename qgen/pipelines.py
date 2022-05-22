@@ -150,10 +150,10 @@ class QGPipeline:
             if len(answer) == 0:
                 continue
             for answer_text in answer:
-                sent = sents[i]
+                sent = sents[i].lower()
                 sents_copy = sents[:]
 
-                answer_text = answer_text.strip()
+                answer_text = answer_text.strip().lower()
 
                 ans_start_idx = sent.index(answer_text)
 
