@@ -2,8 +2,8 @@ from http.client import HTTPException
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from qgen.quiz import generate_custom_qa, generate_qa
-from qgen.quiz import find_topic
+from generator.quiz import generate_custom_qa, generate_qa
+from generator.quiz import find_topic
 
 router = APIRouter()
 
